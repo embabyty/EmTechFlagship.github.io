@@ -303,33 +303,15 @@ ul {
 
 .bento-grid .card:first-child {
   grid-column: 1 / -1;
-  background-image: url('../Images/EmBaby.jpeg'); /* Swap with your photo path */
+  background-image: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 40%),
+                    url('../Images/EmBaby.jpeg');
   background-size: cover;
   background-position: center;
   border-radius: 28px;
-  position: relative;
   display: flex;
-  align-items: flex-end; /* Locks text to the absolute bottom left */
+  align-items: flex-end;
   padding: 40px;
   min-height: 600px;
-  
-}
-
-.bento-grid .card:first-child::before {
-content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 40%);
-  border-radius: 28px;
-  z-index: 2; /* Ensures the gradient shadow is above the image but below the text */
-  
-}
-
-.hero-card {
-  position: relative;
-  z-index: 2; /* Pushes text on top of the gradient shadow overlay */
-  color: #ffffff;
-  font-family: sans-serif
 }
 
 .bento-grid .card:nth-child(2) {
@@ -345,20 +327,28 @@ content: '';
   grid-column: 1 / -1;
 }
 
-.hero-card  {
-  text-align: center;
-  padding: 48px 24px;
+.hero-card {
+  text-align: left;
+}
+
+.hero-card * {
+  color: #fff;
 }
 
 .hero-card h2 {
   font: var(--md-sys-typescale-display-medium);
-  color: var(--md-sys-color-primary);
   margin-bottom: 8px;
 }
 
 .hero-card p {
   font: var(--md-sys-typescale-headline-small);
-  color: var(--md-sys-color-on-surface-variant);
+}
+
+.aka-tag {
+  display: block;
+  font: var(--md-sys-typescale-title-medium);
+  opacity: 0.9;
+  margin-top: 4px;
 }
 
 .card__emoji {
