@@ -1,26 +1,60 @@
 const toggleButton = document.getElementById('theme-toggle');
+const menu = document.getElementById('theme-menu');
+const items = menu.querySelectorAll('.theme-dropdown__item');
 
-// 1. Check for saved theme preference, otherwise check system settings
-const currentTheme = localStorage.getItem('theme') || 
-                     (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+const themeNames = { light: 'Light', dark: 'Dark', amoled: 'AMOLED' };
+const themeLabel = document.getElementById('theme-label');
 
-// 2. Apply the initial theme on page load
-if (currentTheme === 'dark') {
-    document.documentElement.setAttribute('data-theme', 'dark');
+let currentTheme = localStorage.getItem('theme') ||
+  (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+function applyTheme(theme) {
+  if (theme === 'light') {
+    document.documentElement.removeAttribute('data-theme');
+  } else {
+    document.documentElement.setAttribute('data-theme', theme);
+  }
+  items.forEach(item => {
+    item.classList.toggle('theme-dropdown__item--active', item.dataset.themeValue === theme);
+  });
+  if (themeLabel) themeLabel.textContent = themeNames[theme] || 'Light';
+  localStorage.setItem('theme', theme);
+  currentTheme = theme;
 }
 
-// 3. Toggle theme function
-toggleButton.addEventListener('click', () => {
-    let theme = 'light';
-    
-    // If it's currently light, make it dark
-    if (document.documentElement.getAttribute('data-theme') !== 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        theme = 'dark';
-    } else {
-        document.documentElement.removeAttribute('data-theme');
-    }
-    
-    // Save the choice to local storage
-    localStorage.setItem('theme', theme);
+applyTheme(currentTheme);
+
+toggleButton.addEventListener('click', (e) => {
+  e.stopPropagation();
+  menu.classList.toggle('theme-dropdown__menu--open');
 });
+
+items.forEach(item => {
+  item.addEventListener('click', () => {
+    applyTheme(item.dataset.themeValue);
+    menu.classList.remove('theme-dropdown__menu--open');
+  });
+});
+
+document.addEventListener('click', () => {
+  menu.classList.remove('theme-dropdown__menu--open');
+});
+
+const sidebar = document.querySelector('.sidebar');
+const sidebarToggle = document.getElementById('sidebar-toggle');
+
+if (sidebar && sidebarToggle) {
+  const sidebarState = localStorage.getItem('sidebar');
+  if (sidebarState === 'collapsed') {
+    sidebar.classList.add('sidebar--collapsed');
+  }
+
+  sidebarToggle.addEventListener('click', () => {
+    sidebar.classList.toggle('sidebar--collapsed');
+    localStorage.setItem('sidebar',
+      sidebar.classList.contains('sidebar--collapsed') ? 'collapsed' : 'expanded'
+    );
+  });
+}
+
+
