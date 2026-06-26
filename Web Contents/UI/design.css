@@ -743,38 +743,8 @@ ul {
   .bento-grid .card:first-child {
     min-height: 320px;
     flex: 0 0 280px;
-  }
-
-.search-bar {
-display: flex;
-  align-items: center;
-  background-color: #ffffff; /* Gives it a clean white search bar look */
-  padding: 8px 12px;
-  border-radius: 24px; /* Rounds the edges */
-  width: 300px; /* Limits the total width of the search bar */
-}
 }
 
-.search-bar:focus-within {
-  border-color: var(--md-sys-color-on-surface-variant);
-  background: var(--md-sys-color-surface-container-highest);
-}
-
-.search-bar__icon {
-  width: 20px;       /* Forces the width to a normal size */
-  height: 20px;      /* Forces the height to match */
-  margin-right: 8px; /* Pushes the text box slightly away from the icon */
-  object-fit: contain;
-}
-
-.search-bar__input {
-  flex: 1;
-  border: none;
-  background: transparent;
-  color: var(--md-sys-color-on-surface);
-  font: var(--md-sys-typescale-body-large);
-  outline: none;
-}
 
 .search-bar__input::placeholder {
   color: var(--md-sys-color-on-surface-variant);
@@ -787,4 +757,4 @@ display: flex;
   .home-content {
     padding: 16px;
   }
-
+}
