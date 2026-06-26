@@ -1,6 +1,5 @@
 name = "embaby"
 compatibility_date = "2026-06-26"
-main = "Web Contents/Functions/function.js"
 
 [assets]
 directory = "Web Contents"
